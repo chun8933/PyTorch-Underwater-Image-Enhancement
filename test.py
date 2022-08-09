@@ -61,9 +61,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--checkpoint', help='checkpoints path', required=True)
     parser.add_argument(
-            '--images', help='test images folder', default='./test_img/')
+            '--images', help='test images folder', default='./data/input/images')
     parser.add_argument(
-            '--result', help='results folder', default='./results/')
+            '--result', help='results folder', default='./data/output/test')
     args = parser.parse_args()
     checkpoint = args.checkpoint
     imgs = args.images
