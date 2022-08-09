@@ -12,7 +12,7 @@ TODO:
 ### Updated
 python main.py -h
 To use cv2 superres, plz add --superres
-also, pip3 install pip install opencv-contrib-python
+also, install lib by pip install opencv-contrib-python
 
 
 ### Requirements
