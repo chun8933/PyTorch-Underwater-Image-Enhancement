@@ -1,8 +1,7 @@
 '''
 Usgae:
-python main.py --mode=image
-python main.py --mode=video
---superres / -h
+python main.py 
+--superres
 '''
 
 from pyexpat import model
@@ -38,7 +37,7 @@ def fromImage(dir, file_save_dir):
     # write output
     cv2.imwrite('{}/{}_corrected.jpg'.format(file_save_dir, img_name), corrected)
     # UI show
-    imshow(corrected)
+    # imshow(corrected)
 
 
 def fromVideo(dir, file_save_dir):
@@ -70,8 +69,7 @@ def fromVideo(dir, file_save_dir):
         # Check Next and get the image
         success, image = cap.read()
         # UI Show
-        if imshow(corrected):
-            break
+        # if imshow(corrected): break
 
     # release!!!!!!
     out.release()
@@ -99,7 +97,7 @@ def core(img):
     return corrected
 
 
-def main(cpp, fp, mp, isVideo, correction, superres):
+def main(cpp, fp, mp, videoMode, correction, superres):
     # Check for GPU
     global device
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -139,7 +137,7 @@ def main(cpp, fp, mp, isVideo, correction, superres):
     starttime = datetime.datetime.now()
     dirs = IO.fileDirs(fp)
     for dir in dirs:
-        if not isVideo:
+        if not videoMode:
             fromImage(dir, image_result_path)
         else:
             fromVideo(dir, video_result_path)
@@ -160,7 +158,6 @@ if __name__ == '__main__':
         '--images', help='path to the images folder', default='./data/input/images/')
     parser.add_argument('--videos', help='path to the videos folder',
                         default='./data/input/videos/')
-    parser.add_argument('--modes', help='select video or image', required=True)
     parser.add_argument("--model", default='./models/ESPCN_x2.pb',
                         help="path to the super resolution model")
     parser.add_argument('--correction', help='True/False',
@@ -170,9 +167,10 @@ if __name__ == '__main__':
 
     # init configs
     args = parser.parse_args()
-    isVideo = (args.modes == 'video')
-    fp = args.videos if isVideo else args.images
+    modes = input('Video or Image?: ')
+    videoMode = (modes.lower() == 'video')
+    fp = args.videos if videoMode else args.images
 
     # start program
     main(args.checkpoint, fp, args.model,
-         isVideo, args.correction, args.superres)
+         videoMode, args.correction, args.superres)
