@@ -11,8 +11,7 @@ TODO:
 
 ### Updated
     python main.py -h
-    To use cv2 superres, plz add --superres
-    also, lib opencv-contrib-python is required
+also, lib opencv-contrib-python is required
 
 ### Docker
     The image "chunchan/python-cv-image" is from https://github.com/chun8933/Docker-Python-Torch-CV.git
