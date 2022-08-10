@@ -5,7 +5,7 @@ This is the repo for "Underwater Image Enhancement based on Deep Learning and Im
 The current code works with NVIDIA GPU on Ubuntu. You can do testing on CPU. 
 
 TODO:
-1. Add Docker
+1. Add Docker (DONE)
 2. Train a superres model for Underwate later and only,
 
 
