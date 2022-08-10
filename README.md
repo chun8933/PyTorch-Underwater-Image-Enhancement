@@ -18,6 +18,9 @@ also, lib opencv-contrib-python is required
 The image "chunchan/python-cv-image" is from https://github.com/chun8933/Docker-Python-Torch-CV.git
 modify the image name to your own built
 
+### Basic Docker Usage
+    docker container ls
+    docker cp CONTAINER:/app/data/output YOUR_DEST_PATH
 
 ### Requirements
     pip install -r requirements.txt
