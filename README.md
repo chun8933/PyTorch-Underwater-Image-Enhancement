@@ -5,18 +5,18 @@ This is the repo for "Underwater Image Enhancement based on Deep Learning and Im
 The current code works with NVIDIA GPU on Ubuntu. You can do testing on CPU. 
 
 TODO:
-1. Add Docker (DONE)
-2. Train a superres model for Underwate later and only,
+    1. Add Docker (DONE)
+    2. Train a superres model for Underwate later and only,
 
 
 ### Updated
-python main.py -h
-To use cv2 superres, plz add --superres
-also, lib opencv-contrib-python is required
+    python main.py -h
+    To use cv2 superres, plz add --superres
+    also, lib opencv-contrib-python is required
 
 ### Docker
-The image "chunchan/python-cv-image" is from https://github.com/chun8933/Docker-Python-Torch-CV.git
-modify the image name to your own built
+    The image "chunchan/python-cv-image" is from https://github.com/chun8933/Docker-Python-Torch-CV.git
+    modify the image name to your own built
 
 ### Basic Docker Usage
     docker container ls
