@@ -16,7 +16,7 @@ import datetime
 import cv2
 import Tools.Superres as Superres
 import Tools.IOExt as IO
-
+import Tools.Progressbar as progress
 
 def imshow(img):
     # show UI
@@ -49,6 +49,7 @@ def fromVideo(dir, file_save_dir):
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) * (sr.getScale() if useSuperres else 1)
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)) * (sr.getScale() if useSuperres else 1)
     fps = cap.get(cv2.CAP_PROP_FPS)
+    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
     # ready the first frame and start the loop
     success, image = cap.read()
@@ -59,6 +60,7 @@ def fromVideo(dir, file_save_dir):
     out = cv2.VideoWriter(
         '{}/{}_corrected.mp4'.format(file_save_dir, video_name), fourcc, fps, (width, height))
 
+    i = 1
     while success:
         # convert from CV2 image to PIL Image
         img = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -68,8 +70,11 @@ def fromVideo(dir, file_save_dir):
         out.write(corrected)
         # Check Next and get the image
         success, image = cap.read()
+        # Log into progress bar
+        progress.log(i, frame_count, '{}/{}'.format(i, frame_count))
+        i+=1
         # UI Show
-        # if imshow(corrected): break
+        if imshow(corrected): break
 
     # release!!!!!!
     out.release()
@@ -142,7 +147,7 @@ def main(cpp, fp, mp, videoMode, correction, superres):
         else:
             fromVideo(dir, video_result_path)
     endtime = datetime.datetime.now()
-    print('Done')
+    print(' Done')
 
     # Calculate the time taken with this process
     print('Save at '+result_path)
